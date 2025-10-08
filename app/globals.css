@@ -1,0 +1,255 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Updated color palette for Palais El Mokri brand */
+:root {
+  /* Palais El Mokri Brand Colors */
+  --palace-navy: #182634;
+  --palace-gold: #ddd384;
+  --palace-light-gray: #e8e6e6;
+  --palace-medium-gray: #c7c7c7;
+  --palace-soft-white: #f9fafb;
+
+  /* Semantic Design Tokens */
+  --background: #f9fafb;
+  --foreground: #182634;
+  --card: #e8e6e6;
+  --card-foreground: #182634;
+  --popover: #ffffff;
+  --popover-foreground: #182634;
+  --primary: #182634;
+  --primary-foreground: #f9fafb;
+  --secondary: #ddd384;
+  --secondary-foreground: #182634;
+  --muted: #e8e6e6;
+  --muted-foreground: #374151;
+  --accent: #ddd384;
+  --accent-foreground: #182634;
+  --destructive: #ff4d4d;
+  --destructive-foreground: #ffffff;
+  --border: #e8e6e6;
+  --input: #ffffff;
+  --ring: rgba(24, 38, 52, 0.2);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.5rem;
+  --sidebar: #f9fafb;
+  --sidebar-foreground: #182634;
+  --sidebar-primary: #e8e6e6;
+  --sidebar-primary-foreground: #182634;
+  --sidebar-accent: #ddd384;
+  --sidebar-accent-foreground: #182634;
+  --sidebar-border: #e8e6e6;
+  --sidebar-ring: rgba(24, 38, 52, 0.2);
+}
+
+.dark {
+  --background: #182634;
+  --foreground: #f9fafb;
+  --card: #1f2937;
+  --card-foreground: #f9fafb;
+  --popover: #1f2937;
+  --popover-foreground: #f9fafb;
+  --primary: #ddd384;
+  --primary-foreground: #182634;
+  --secondary: #374151;
+  --secondary-foreground: #f9fafb;
+  --muted: #374151;
+  --muted-foreground: #9ca3af;
+  --accent: #ddd384;
+  --accent-foreground: #182634;
+  --destructive: #ff4d4d;
+  --destructive-foreground: #ffffff;
+  --border: #374151;
+  --input: #374151;
+  --ring: rgba(221, 211, 132, 0.2);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: #182634;
+  --sidebar-foreground: #f9fafb;
+  --sidebar-primary: #ddd384;
+  --sidebar-primary-foreground: #182634;
+  --sidebar-accent: #374151;
+  --sidebar-accent-foreground: #f9fafb;
+  --sidebar-border: #374151;
+  --sidebar-ring: rgba(221, 211, 132, 0.2);
+}
+
+@theme inline {
+  --font-sans: system-ui, sans-serif;
+  --font-serif: serif;
+  --font-display: serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Added custom typography classes for Palais El Mokri */
+  .font-display {
+    font-family: 'Cinzel', serif;
+  }
+
+  .font-serif {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .font-sans {
+    font-family: 'Avenir', system-ui, sans-serif;
+  }
+
+  /* Custom utility classes for Moroccan design elements */
+  .zellige-pattern {
+    background-image: linear-gradient(
+      45deg,
+      transparent 25%,
+      rgba(221, 211, 132, 0.1) 25%,
+      rgba(221, 211, 132, 0.1) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(221, 211, 132, 0.1) 75%
+    );
+    background-size: 20px 20px;
+  }
+
+  .moroccan-arch {
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 25% 100%, 0 75%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Added smooth scrolling and custom animations */
+@layer utilities {
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--palace-navy);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--palace-gold);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--muted);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--palace-navy) var(--muted);
+}
