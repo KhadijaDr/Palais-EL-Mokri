@@ -1,15 +1,38 @@
-import { createClient } from '@supabase/supabase-js'
-import { User, Address, UserPreferences } from './types'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { User } from './types'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+let _client: SupabaseClient | null = null
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true
+function ensureClient(): SupabaseClient {
+  if (_client) return _client
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error(
+      'Missing Supabase env vars: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY'
+    )
   }
+
+  _client = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true,
+    },
+  })
+
+  return _client
+}
+
+// Lazy proxy to avoid creating the client at module load (build-time)
+export const supabase = new Proxy({} as SupabaseClient, {
+  get(_target, prop) {
+    const client = ensureClient()
+    // @ts-ignore - dynamic property access
+    return client[prop]
+  },
 })
 
 // Types pour l'authentification
